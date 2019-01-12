@@ -1,0 +1,11 @@
+[Unit]
+Description=Tinkereum Explorer
+After=network-online.target
+
+[Service]
+Type=simple
+User=%i
+ExecStart=/home/g/explorer/node_modules/http-server/bin/http-server /home/g/explorer/app -a localhost -p 3002 -c-1
+
+[Install]
+WantedBy=multi-user.target
