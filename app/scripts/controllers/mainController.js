@@ -31,7 +31,7 @@ angular.module('ethExplorer')
 
                 var regexpTx = /[0-9a-zA-Z]{64}?/;
                 //var regexpAddr =  /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/; // TODO ADDR REGEX or use isAddress(hexString) API ?
-                var regexpAddr = /^(0x)?[0-9a-f]{40}$/; //New ETH Regular Expression for Addresses
+                var regexpAddr = /^(0x)?[0-9a-f]{40}$/; //New TNK Regular Expression for Addresses
                 var regexpBlock = /[0-9]{1,7}?/;
 
                 var result =regexpTx.test(requestStr);
@@ -170,13 +170,16 @@ angular.module('ethExplorer')
 
 
         function getHashrate()	{
+          /*
           $.getJSON("https://etherchain.org/api/miningEstimator", function(json) {
             var hr = json.data[0].hashRate;
             $scope.hashrate = hr;
-       	});
-      }
+         	});
+          */
+        }
 
         function getETHRates() {
+          // @TODO
           $.getJSON("https://api.coinmarketcap.com/v1/ticker/ethereum/", function(json) {
             var price = Number(json[0].price_usd);
             $scope.ethprice = "$" + price.toFixed(2);
@@ -189,7 +192,7 @@ angular.module('ethExplorer')
 
           $.getJSON("https://api.coinmarketcap.com/v1/ticker/ethereum/", function(json) {
             var cap = Number(json[0].market_cap_usd);
-            //console.log("Current ETH Market Cap: " + cap);
+            //console.log("Current TNK Market Cap: " + cap);
             $scope.ethmarketcap = cap;
           });
         }
@@ -198,8 +201,11 @@ angular.module('ethExplorer')
             var currentTXnumber = web3.eth.blockNumber;
             $scope.txNumber = currentTXnumber;
             $scope.recenttransactions = [];
-            for (var i=0; i < 10 && currentTXnumber - i >= 0; i++) {
-              $scope.recenttransactions.push(web3.eth.getTransactionFromBlock(currentTXnumber - i));
+            for (var i=0; i < 15 && currentTXnumber - i >= 0; i++) {
+              var tx = web3.eth.getTransactionFromBlock(currentTXnumber - i);
+              if (tx) {
+                $scope.recenttransactions.push(tx);
+              }
             }
         }
 
@@ -233,8 +239,8 @@ angular.module('filters', []).
   filter('diffFormat', function () {
     return function (diffi) {
       if (isNaN(diffi)) return diffi;
-      var n = diffi / 1000000000000;
-      return n.toFixed(3) + " T";
+      var n = diffi / 1000000;
+      return n.toFixed(3) + " M";
     };
   }).
   filter('stylize', function () {
@@ -254,8 +260,8 @@ angular.module('filters', []).
   filter('hashFormat', function () {
     return function (hashr) {
       if (isNaN(hashr)) return hashr;
-      var n = hashr / 1000000000000;
-      return n.toFixed(3) + " TH/s";
+      var n = hashr / 1000000;
+      return n.toFixed(3) + " MH/s";
     };
   }).
   filter('gasFormat', function () {
@@ -270,7 +276,7 @@ angular.module('filters', []).
       if (isNaN(txt)) return txt;
       var b = new BigNumber(txt);
       var w = web3.fromWei(b, "ether");
-      return w.toFixed(6) + " ETH";
+      return w.toFixed(6) + " TNK";
     };
   }).
   filter('sizeFormat', function () {

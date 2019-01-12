@@ -7,8 +7,8 @@
   <base href="/">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ethereum Block Explorer</title>
-  <meta name="description" content="An Ethereum (ETH) Block Explorer">
+  <title>Tinkereum Block Explorer | Tinker (TNK)</title>
+  <meta name="description" content="A Tinkereum (TNK) Block Explorer">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.min.css">
@@ -16,7 +16,7 @@
   <script src="https://use.fontawesome.com/9376283190.js"></script>
   <script src="bower_components/web3/dist/web3.min.js"></script>
 </head>
-<body>
+<body id="tinkereum">
 <nav class="navbar navbar-dark navbar-static-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -24,11 +24,11 @@
             <span class="sr-only">Toggle navigation</span>
             <i class="fa fa-bars"></i>
         </button>
-        <a class="navbar-brand" href="./#/">ETHER EXPLORER</a>
+        <a class="navbar-brand" href="./#/">TINKEREUM EXPLORER</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
         <ul class="nav navbar-nav">
-            <li><a href="./#/">Home</a></li>
+            <li><a href="./#/">Recent Blocks/TXs</a></li>
             <li><a href="./#/chain">Blockchain Info</a></li>
         </ul>
         <div class="col-sm-3 col-md-3 pull-right">
@@ -36,7 +36,7 @@
                 <div class="input-group">
                     <input type="text" placeholder="Tx Hash, Address, or Block #" name="requestType" required  ng-model="ethRequest"  class="form-control searchi">
                     <div class="input-group-btn">
-                        <button class="btn btn-primary btn-blue" type="submit"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
             </form>
@@ -65,6 +65,7 @@
   <script src="scripts/controllers/blockInfosController.js"></script>
   <script src="scripts/controllers/transactionInfosController.js"></script>
 <!--jQuery-->
+<!--
 <script>
 function shapeshift_click(a,e) {
   e.preventDefault();
@@ -73,7 +74,7 @@ function shapeshift_click(a,e) {
   return false;
 }
 </script>
-
+-->
   <!--Services-->
     <div id="connectwarning" class="modal fade" role="dialog">
 
@@ -84,11 +85,12 @@ function shapeshift_click(a,e) {
             <!-- Modal content-->
             <div class="modal-content">
                 <center><div class="modal-header">
-                    <h4 class="modal-title">Allow Access to Geth and Refresh the Page</h4>
+                    <h4 class="modal-title" style="color: #FFF">Can't connect to Blockchain API, please try again later.</h4>
                 </div>
+                <!--
                 <div class="modal-body">
                     <code><p id="modaltext"></p></code>
-                </div></center>
+                </div>--></center>
             </div>
         </div>
     </div>
@@ -96,15 +98,15 @@ function shapeshift_click(a,e) {
 
 <div class="footer styledfoot">
     <footer><br />
-            © ETHER EXPLORER 2016 | <a href="http://github.com/carsenk/explorer">Fork me on GitHub</a><br />
-            Helpful Links: ethereum.org | gdax.com | coinbase.com
-            <br />
+            © 2019  <a href="https://tinkereum.org">Tinkereum</a> / <a href="https://chaincraft.cc" target="_blank">Chaincraft.cc</a> | Forked with &#x2764; from <a href="https://github.com/carsenk/explorer" target="_blank">Ether Explorer</a> (GPLv3, <a href="https://github.com/Chaincraft-cc/explorer" target="_blank">check source on GitHub</a>)
     </footer>
 </div>
+<!--
 <script>
 //begin AltSheets
 $("#modaltext").text( geth_command );
 // end AltSheets
 </script>
+-->
 </body>
 </html>
